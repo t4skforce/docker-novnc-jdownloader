@@ -1,34 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openbox_menu xmlns="http://openbox.org/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://openbox.org/ file:///usr/share/openbox/menu.xsd">
-    <menu id="root-menu" label="Openbox 3">
-        <item label="JDownloader">
-            <action name="Execute">
-                <execute>/usr/bin/jdownloader</execute>
-            </action>
-        </item>
-        <menu id="system" label="System">
-          <item label="Terminal">
-              <action name="Execute">
-                  <execute>/usr/bin/terminator</execute>
-              </action>
-          </item>
-          <item label="Htop">
-              <action name="Execute">
-                  <execute>terminator -x htop</execute>
-              </action>
-          </item>
-        </menu>
-        <menu id="config" label="Config">
-          <item label="Openbox preferences">
-              <action name="Execute">
-                  <execute>/usr/bin/obconf</execute>
-              </action>
-          </item>
-          <item label="Access">
-              <action name="Execute">
-                  <execute>terminator -x basic_auth</execute>
-              </action>
-          </item>
-        </menu>
-    </menu>
+
+  <menu id="system-menu" label="System">
+    <item label="Terminal">
+        <action name="Execute">
+            <execute>/usr/bin/terminator</execute>
+        </action>
+    </item>
+    <item label="Htop">
+        <action name="Execute">
+            <execute>terminator -x htop</execute>
+        </action>
+    </item>
+    <separator />
+    <item label="Access">
+        <action name="Execute">
+            <execute>terminator -x basic_auth</execute>
+        </action>
+    </item>
+    <item label="Openbox Configuration Manager">
+      <action name="Execute">
+        <command>obconf</command>
+        <startupnotify><enabled>yes</enabled></startupnotify>
+      </action>
+    </item>
+    <separator />
+    <item label="Reconfigure Openbox">
+      <action name="Reconfigure" />
+    </item>
+  </menu>
+
+  <menu id="root-menu" label="Openbox 3">
+      <item label="JDownloader">
+          <action name="Execute">
+              <execute>/usr/bin/jdownloader</execute>
+          </action>
+      </item>
+      <separator />
+      <menu id="system-menu"/>
+      <separator />
+      <item label="Log Out">
+        <action name="Exit">
+          <prompt>yes</prompt>
+        </action>
+      </item>
+  </menu>
 </openbox_menu>

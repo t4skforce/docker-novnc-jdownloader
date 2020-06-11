@@ -62,7 +62,7 @@ fi
 
 # wallpaper
 if ! grep -q feh "$HOME/.config/openbox/autostart"; then
-  echo '(sleep 1s && feh --bg-fill /etc/wallpaper.jpg) &' >> $HOME/.config/openbox/autostart
+  echo '(sleep 1s && while true; do feh --bg-fill /etc/wallpaper.jpg; sleep 1m; done) &' >> $HOME/.config/openbox/autostart
 fi
 
 echo "

@@ -12,7 +12,7 @@
 </resistance>
 
 <focus>
-  <focusNew>yes</focusNew>
+  <focusNew>no</focusNew>
   <!-- always try to focus new windows when they appear. other rules do
        apply -->
   <followMouse>no</followMouse>
@@ -644,10 +644,10 @@
 </menu>
 
 <applications>
-  <application title="JDownloader 2">
+	<application title="JDownloader 2">
     <maximized>true</maximized>
-		<!--<fullscreen>yes</fullscreen>
-		<focus>yes</focus>-->
+		<!--<fullscreen>yes</fullscreen>-->
+		<focus>yes</focus>
   </application>
 <!--
   # this is an example with comments through out. use these to make your
