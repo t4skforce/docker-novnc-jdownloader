@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=JDownloader
+Icon=jdownloader
+TryExec=jdownloader
+Exec=jdownloader
+Terminal=false
+Categories=Application;Network;
+StartupWMClass=jd-Main
