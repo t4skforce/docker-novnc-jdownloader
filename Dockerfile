@@ -9,7 +9,9 @@ FROM debian:buster-slim
 
 ENV HOME=/data \
     PUID=1000 \
-    PGID=1000
+    PGID=1000 \
+    HTTP_PORT=80 \
+    HTTPS_PORT=443
 
 RUN set -xe && \
     apt-get update -y && \
@@ -60,6 +62,6 @@ COPY app.desktop /usr/share/applications/
 WORKDIR ${HOME}
 VOLUME ${HOME}
 
-EXPOSE 80 443
+EXPOSE ${HTTP_PORT} ${HTTPS_PORT}
 ENTRYPOINT [ "docker-entrypoint.sh" ]
 CMD []

@@ -15,16 +15,16 @@ http {
   }
 
   server {
-      listen 80 default_server;
+      listen ${HTTP_PORT} default_server;
       server_name _;
-      return 301 https://$host$request_uri;
+      return 301 https://$host:${HTTPS_PORT}$request_uri;
   }
 
   server {
-    listen 443 ssl default_server;
+    listen ${HTTPS_PORT} ssl default_server;
     server_name _;
-    ssl_certificate      ${HOME}/.cert/nginx.crt;
-    ssl_certificate_key  ${HOME}/.cert/nginx.key;
+    ssl_certificate      ${HOME}/.cert/server.crt;
+    ssl_certificate_key  ${HOME}/.cert/server.key;
     ssl_session_timeout  60m;
     ssl_prefer_server_ciphers on;
     ssl_protocols TLSv1 TLSv1.1 TLSv1.2;

@@ -18,12 +18,15 @@ fi
 
 
 # nginx setup
-if [ ! -d "$HOME/.cert/nginx.key" ]; then
+export SERVER_NAME=${SERVER_NAME-$HOSTNAME}
+export HTTP_PORT=${HTTP_PORT-80}
+export HTTPS_PORT=${HTTPS_PORT-443}
+if [ ! -d "$HOME/.cert/server.key" ]; then
   echo "creating self signed certificate $HOME/.cert/nginx.crt"
   mkdir -p $HOME/.cert
   openssl req -new -newkey rsa:4096 -days 3650 -nodes -x509 \
-    -subj "/C=US/ST=Denial/L=Springfield/O=Dis/CN=${HOSTNAME}" \
-    -keyout "$HOME/.cert/nginx.key" -out "$HOME/.cert/nginx.crt"
+    -subj "/C=US/ST=Denial/L=Springfield/O=Dis/CN=${SERVER_NAME}" \
+    -keyout "$HOME/.cert/server.key" -out "$HOME/.cert/server.crt"
 fi
 
 if [ ! -z "$USERNAME" ]; then
@@ -35,8 +38,8 @@ fi
 if [ -f "$HOME/.htpasswd" ]; then
   export NGINX_AUTH="auth_basic \"Administrator’s Area\";auth_basic_user_file $HOME/.htpasswd;"
 fi
-envsubst '${HOME},${NGINX_AUTH}' < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf
-unset NGINX_AUTH
+envsubst '${HOME},${NGINX_AUTH},${HTTP_PORT},${HTTPS_PORT}' < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf
+unset NGINX_AUTH HTTP_PORT HTTPS_PORT SERVER_NAME
 
 # setup for openbox
 if [ ! -d "$HOME/.config/openbox" ]; then
