@@ -13,7 +13,7 @@ ENV HOME=/data \
 
 RUN set -xe && \
     apt-get update -y && \
-    apt-get install -y --no-install-recommends openbox obconf tint2 feh papirus-icon-theme arc-theme tigervnc-standalone-server supervisor && \
+    apt-get install -y --no-install-recommends openbox obconf tint2 feh papirus-icon-theme arc-theme tigervnc-standalone-server supervisor cron && \
     rm -rf /var/lib/apt/lists && \
     mkdir -p /usr/share/desktop-directories
 
@@ -28,13 +28,9 @@ RUN set -xe && \
     rm -r /etc/nginx/nginx.conf && \
     rm -rf /var/lib/apt/lists
 
+COPY cronjobs /etc/cron.d/
 RUN set -xe && \
-    mkdir -p /usr/share/man/man1 && \
-    apt-get update -y && \
-    apt-get install -y --no-install-recommends default-jre && \
-    rm -rf /var/lib/apt/lists && \
-    export JAVA_HOME=$(cd /usr/lib/jvm/*openjdk* ; pwd) && echo "JAVA_HOME=$JAVA_HOME" >> /etc/environment && \
-    export PATH=$JAVA_HOME/bin:$PATH && echo "PATH=$PATH" >> /etc/environment
+    chmod 0644 /etc/cron.d/cronjobs
 
 COPY docker-entrypoint.sh /usr/bin/docker-entrypoint.sh
 COPY --from=easy-novnc-build /bin/easy-novnc /usr/local/bin/
@@ -45,12 +41,21 @@ COPY wallpaper.jpg /etc/
 COPY supervisord.conf /etc/
 COPY nginx.conf.template /etc/nginx/
 COPY auth.sh /usr/bin/basic_auth
-COPY jdownloader.sh /usr/bin/jdownloader
-COPY app.desktop /usr/share/applications/
 
 RUN groupadd --gid ${PUID} app && \
     useradd --home-dir ${HOME} --shell /bin/bash --uid ${PUID} --gid ${PUID} app && \
     mkdir -p ${HOME}
+
+RUN set -xe && \
+    mkdir -p /usr/share/man/man1 && \
+    apt-get update -y && \
+    apt-get install -y --no-install-recommends default-jre && \
+    rm -rf /var/lib/apt/lists && \
+    export JAVA_HOME=$(cd /usr/lib/jvm/*openjdk* ; pwd) && echo "JAVA_HOME=$JAVA_HOME" >> /etc/environment && \
+    export PATH=$JAVA_HOME/bin:$PATH && echo "PATH=$PATH" >> /etc/environment
+
+COPY jdownloader.sh /usr/bin/jdownloader
+COPY app.desktop /usr/share/applications/
 
 WORKDIR ${HOME}
 VOLUME ${HOME}

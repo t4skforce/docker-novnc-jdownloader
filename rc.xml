@@ -49,7 +49,7 @@
 </placement>
 
 <theme>
-  <name>Arc-Dark</name>
+  <name>${THEME}</name>
   <titleLayout>NLIMC</titleLayout>
   <!--
       available characters are NDSLIMC, each can occur at most once.
@@ -644,10 +644,10 @@
 </menu>
 
 <applications>
-	<application title="JDownloader 2">
-    <maximized>true</maximized>
-		<!--<fullscreen>yes</fullscreen>-->
-		<focus>yes</focus>
+	<application title="${APP_TITLE}">
+    <maximized>${APP_MAXIMIZE}</maximized>
+		<fullscreen>${APP_FULLSCREEN}</fullscreen>
+		<focus>${APP_FOCUS}</focus>
   </application>
 <!--
   # this is an example with comments through out. use these to make your

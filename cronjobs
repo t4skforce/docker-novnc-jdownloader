@@ -1,0 +1,5 @@
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+DISPLAY=:0
+
+# update wallpaper every 1m
+* * * * * app feh --bg-fill /etc/wallpaper.jpg

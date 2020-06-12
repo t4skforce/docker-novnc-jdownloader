@@ -43,7 +43,13 @@ if [ ! -d "$HOME/.config/openbox" ]; then
   mkdir -p $HOME/.config/openbox
 fi
 if [ ! -f "$HOME/.config/openbox/rc.xml" ]; then
-  cp /etc/xdg/openbox/rc.xml $HOME/.config/openbox/rc.xml
+  export THEME=${THEME:-Arc-Dark}
+  export APP_TITLE=${APP_TITLE:-JDownloader 2}
+  export APP_MAXIMIZE=${APP_MAXIMIZE:-yes}
+  export APP_FULLSCREEN=${APP_FULLSCREEN:-no}
+  export APP_FOCUS=${APP_FOCUS:-yes}
+  envsubst '${THEME},${APP_TITLE},${APP_MAXIMIZE},${APP_FULLSCREEN}' < /etc/xdg/openbox/rc.xml > $HOME/.config/openbox/rc.xml
+  unset THEME APP_TITLE APP_MAXIMIZE APP_FULLSCREEN APP_FOCUS
   chown app:app $HOME/.config/openbox/rc.xml
 fi
 if [ ! -f "$HOME/.config/openbox/autostart" ]; then
@@ -52,17 +58,9 @@ if [ ! -f "$HOME/.config/openbox/autostart" ]; then
   chown app:app $HOME/.config/openbox/autostart
 fi
 # menu bar
-if ! grep -q tint2 "$HOME/.config/openbox/autostart"; then
-  echo '(sleep 1s && tint2) &' >> $HOME/.config/openbox/autostart
-fi
 if [ ! -f "$HOME/.config/tint2/tint2rc" ]; then
   mkdir -p $HOME/.config/tint2
   cp /etc/tint2rc $HOME/.config/tint2/tint2rc
-fi
-
-# wallpaper
-if ! grep -q feh "$HOME/.config/openbox/autostart"; then
-  echo '(sleep 1s && while true; do feh --bg-fill /etc/wallpaper.jpg; sleep 1m; done) &' >> $HOME/.config/openbox/autostart
 fi
 
 echo "
