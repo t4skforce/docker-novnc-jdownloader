@@ -14,4 +14,4 @@ build:
 
 run:
 	@echo "runing things"
-	docker run --name docker-jdownloader -it -p 127.0.0.1:80:80/tcp -p 127.0.0.1:443:443/tcp -e USERNAME=admin -e PASSWORD=admin -v ~/Downloads:/data/Downloads:rw --rm t4skforce/docker-jdownloader:latest
+	docker run --name docker-jdownloader -it -p 127.0.0.1:80:80/tcp -p 127.0.0.1:443:443/tcp -e APP_USERNAME=admin -e APP_PASSWORD=admin -v ~/Downloads:/data/Downloads:rw --rm t4skforce/docker-jdownloader:latest
