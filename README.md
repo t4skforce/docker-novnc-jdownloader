@@ -9,8 +9,8 @@ support of env variabls:
 - PGID=1000 default
 
 Optional Basic Auth
-- USERNAME=
-- PASSWORD=
+- APP_USERNAME=
+- APP_PASSWORD=
 
 Optional Server Ports
 - HTTP_PORT=80 default
@@ -18,9 +18,6 @@ Optional Server Ports
 
 Optional Server Name
 - SERVER_NAME=Hostname used for SSL certificate
-
-Optional Kiosk Mode
-- APP_FULLSCREEN=yes (default no)
 
 exposes HTTP_PORT -> redirect -> HTTPS_PORT
 
