@@ -1,0 +1,25 @@
+[Desktop Entry]
+Type=Application
+Name=JDownloader
+Icon=jdownloader
+TryExec=jdownloader
+Exec=jdownloader
+Terminal=false
+Categories=Application;Network;
+StartupWMClass=jd-Main
+
+[Supervisord Entry]
+Name=jdownloader
+Priority=2
+StartRetries=50
+NumProcs=1
+StartSecs=60
+Command=/usr/bin/jdownloader
+Autostart=True
+
+[Openbox Entry]
+Title=JDownloader 2
+FullScreen=yes
+ShowLauncher=yes
+Layer=above
+Focus=yes
