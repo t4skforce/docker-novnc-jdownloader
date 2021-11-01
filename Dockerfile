@@ -1,6 +1,6 @@
 FROM t4skforce/docker-novnc:latest
 
-ARG BUILD_DATE="2021-10-28T17:55:54Z"
+ARG BUILD_DATE="2021-11-01T16:20:05Z"
 
 RUN set -xe && \
     apt-get update -y && \
